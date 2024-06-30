@@ -48,4 +48,4 @@ def api():
 if __name__ == '__main__':
     with open(CONFIG_PATH, 'r') as yml:
         config = yaml.safe_load(yml)
-    app.run(debug=True, host=config['HOST'], port=config['PORT'])
+    app.run(debug=True, host=config['SERVER']['HOST'], port=config['SERVER']['PORT'])
