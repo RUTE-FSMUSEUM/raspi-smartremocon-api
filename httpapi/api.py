@@ -1,4 +1,5 @@
 import os
+import yaml
 from flask import Flask, request, render_template, send_from_directory
 import subprocess
 
@@ -13,6 +14,7 @@ app._static_folder = "./static"
 # Constants
 VALID_QUERY = ['app', 'cmd']
 ROOT_PATH = '../'
+CONFIG_PATH = './server.config.yaml'
 
 @app.route('/')
 def index():
@@ -44,4 +46,6 @@ def api():
         return f'Bad query'
 
 if __name__ == '__main__':
-    app.run(debug=True, host='')
+    with open(CONFIG_PATH, 'r') as yml:
+        config = yaml.safe_load(yml)
+    app.run(debug=True, host=config['HOST'], port=config['PORT'])
