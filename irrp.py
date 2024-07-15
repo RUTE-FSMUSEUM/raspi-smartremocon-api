@@ -359,13 +359,13 @@ def cbf(gpio, level, tick):
 def split_array(arr, N):
     return [arr[i:i + N] for i in range(0, len(arr), N)]
 
-def split_array_lim(arr, lim):
+def split_array_by_thres(arr, thres):
     result = []
     subarr = []
 
     for item in arr:
         subarr.append(item)
-        if item >= lim:
+        if item >= thres:
             result.append(subarr)
             subarr = []
 
@@ -471,7 +471,7 @@ else: # Playback.
       if arg in records:
 
          codes= records[arg]
-         codes_split = split_array_lim(codes, 15000)
+         codes_split = split_array_by_thres(codes, 15000)
 
          for code in codes_split:
             #print(code)
