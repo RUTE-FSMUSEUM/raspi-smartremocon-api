@@ -474,8 +474,6 @@ else: # Playback.
          codes_split = split_array_by_thres(codes, 15000)
 
          for code in codes_split:
-            #print(code)
-
             # Create wave
 
             marks_wid = {}
