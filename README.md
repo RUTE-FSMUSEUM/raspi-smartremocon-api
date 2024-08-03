@@ -133,7 +133,7 @@ echo 'm 17 w   w 17 0   m 18 r   pud 18 u' > /dev/pigpio
 ```bash
 crontab -e
 ```
-- 初回のみエディタを何にするか聞かれるので、数字で回答後、ファイルの最後に下記を記載する。
+- 初回のみエディタを何にするか聞かれるので、数字で回答後、ファイルの最後に下記を記載してください。
 ```bash
 @reboot until echo 'm 17 w   w 17 0   m 18 r   pud 18 u' > /dev/pigpio; do sleep 1s; done
 ```
