@@ -1,6 +1,7 @@
 import os
 import yaml
 from flask import Flask, request, render_template, send_from_directory
+from utils import ReadVersion
 import subprocess
 
 '''
@@ -15,10 +16,21 @@ app._static_folder = "./static"
 VALID_QUERY = ['app', 'cmd']
 ROOT_PATH = '../'
 CONFIG_PATH = './server.config.yaml'
+VERSION = ReadVersion.get(os.path.join("static", "config", "version.info.json"))
 
 @app.route('/')
 def index():
-    return 'Hello world'
+    return render_template(
+        'index.html',
+        version=VERSION,
+    )
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template(
+        'dashboard.html',
+        version=VERSION,
+    )
 
 @app.route('/favicon.ico')
 def favicon():
