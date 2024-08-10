@@ -1,4 +1,4 @@
-# rasp-smartremocon-api
+# raspi-smartremocon-api
 自作スマートリモコン用APIパッケージ（参考：[ラズパイで自作スマートリモコン　LEDドライバを使ってパワーアップ！](https://qiita.com/rute/items/c840b362e9f83e796427)）
 
 ## 概要
