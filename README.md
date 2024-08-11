@@ -258,6 +258,7 @@ http://myremocon.local:5050/api?app=roomlight&cmd=on
 - pigipo・irrp.pyのコードを公開してくださったabyz.me.ukさんへ：[リンク](https://abyz.me.uk/rpi/pigpio/examples.html#Python%20code)
 - 今年の夏も涼しく快適に過ごさせてくれるダイキン工業株式会社さんへ：[リンク](https://www.ac.daikin.co.jp/roomaircon)
 - スマートなUIづくりに大いに貢献するフレームワークBootstrapの開発チームへ：[リンク](https://getbootstrap.com/)
+- 凝ったグラフ描画をより簡易に実現できるフレームワークChart.jsの開発チームへ：[リンク](https://www.chartjs.org/docs/4.4.3/)
 
 
 ## 今後の計画
