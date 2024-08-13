@@ -14,9 +14,10 @@ app._static_folder = "./static"
 
 # Constants
 VALID_QUERY = ['app', 'cmd']
-ROOT_PATH = '../'
-CONFIG_PATH = './server.config.yaml'
-VERSION = ReadVersion.get(os.path.join("static", "config", "version.info.json"))
+HTTPAPI_PATH = os.path.dirname(os.path.abspath(__file__))
+ROOT_PATH = os.path.dirname(HTTPAPI_PATH) # api.pyの一つ上がroot
+CONFIG_PATH = os.path.join(HTTPAPI_PATH, 'server.config.yaml')
+VERSION = ReadVersion.get(os.path.join(HTTPAPI_PATH, "static", "config", "version.info.json"))
 
 @app.route('/')
 def index():
