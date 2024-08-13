@@ -1,0 +1,26 @@
+.col {
+    position: relative;
+    display: flex;
+    justify-content: center; /* 横方向の中央寄せ */
+    align-items: center; /* 縦方向の中央寄せ */
+    height: 100%; /* 必要に応じて高さを設定 */
+}
+
+.chart-overlay {
+    position: absolute;
+    font-size: 3.5em;
+    font-weight: normal;
+    color: #333;
+    pointer-events: none; /* オーバーレイがクリックやホバーに影響を与えないように */
+    z-index: 10; /* チャートの上に表示されるようにする */
+}
+
+.chart-overlay-icon {
+    position: absolute;
+    top: calc(50% + 2em); /* テキストの少し下に配置 */
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 2em;
+    color: #333;
+    z-index: 5; /* テキストの下に表示されるようにする */
+}
