@@ -96,7 +96,9 @@ function initializeCharts(temprature, humidity) {
 // JSONファイルを読み込む関数
 async function loadJSON(filePath) {
     try {
-        const response = await fetch(filePath);
+        const response = await fetch(filePath, {
+            cache: "no-store" // キャッシュを無効化
+        });
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
