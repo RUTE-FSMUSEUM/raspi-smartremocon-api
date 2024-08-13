@@ -8,9 +8,6 @@ import subprocess
 usage: http://{YourServerURL}:{Port}/api?app=light&cmd=on
 '''
 
-# Flask settigns
-app = Flask(__name__)
-app._static_folder = "./static"
 
 # Constants
 VALID_QUERY = ['app', 'cmd']
@@ -18,6 +15,10 @@ HTTPAPI_PATH = os.path.dirname(os.path.abspath(__file__))
 ROOT_PATH = os.path.dirname(HTTPAPI_PATH) # api.pyの一つ上がroot
 CONFIG_PATH = os.path.join(HTTPAPI_PATH, 'server.config.yaml')
 VERSION = ReadVersion.get(os.path.join(HTTPAPI_PATH, "static", "config", "version.info.json"))
+
+# Flask settigns
+app = Flask(__name__)
+app._static_folder = os.path.join(HTTPAPI_PATH, 'static')
 
 @app.route('/')
 def index():
