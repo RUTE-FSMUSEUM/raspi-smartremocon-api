@@ -49,7 +49,7 @@ def api():
         if str(request.args['app']) == "runscr":
             if str(request.args['cmd']) == "sensor":
                 param = str(request.args['app']) + ':' + str(request.args['cmd'])
-                command = f'python3 {ROOT_PATH}/sensor.py -pc ./static/logs/current.json -pl ./static/logs/history.json --test'
+                command = f'python3 {ROOT_PATH}/sensor.py -pc {HTTPAPI_PATH}/static/logs/current.json -pl {HTTPAPI_PATH}/static/logs/history.json {TEST_MODE}'
                 scr_name = 'sensor.py'
             else:
                 return f'{str(request.args["cmd"])}.py is not found'
@@ -74,4 +74,5 @@ def api():
 if __name__ == '__main__':
     with open(CONFIG_PATH, 'r') as yml:
         config = yaml.safe_load(yml)
+    TEST_MODE = '--test' if config['SERVER']['NON_RASPI_MODE'] else ''
     app.run(debug=True, host=config['SERVER']['HOST'], port=config['SERVER']['PORT'])
