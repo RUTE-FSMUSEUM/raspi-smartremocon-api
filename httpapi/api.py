@@ -43,16 +43,28 @@ def apple_tough_icon():
 @app.route('/api', methods=['GET'])
 def api():
     if request.method == 'GET' and all(query in request.args for query in VALID_QUERY):
-        param = str(request.args['app']) + ':' + str(request.args['cmd'])
-        command = f'python3 {ROOT_PATH}/irrp.py -p -g17 -f {ROOT_PATH}/codes {param}'
+        # センサロギング系
+        if str(request.args['app']) == "runscr":
+            if str(request.args['cmd']) == "sensor":
+                param = str(request.args['app']) + ':' + str(request.args['cmd'])
+                command = f'python3 {ROOT_PATH}/sensor.py -pc ./static/logs/current.json -pl ./static/logs/history.json --test'
+                scr_name = 'sensor.py'
+            else:
+                return f'{str(request.args["cmd"])}.py is not found'
+            
+        # リモコンコマンド送出系
+        else:
+            param = str(request.args['app']) + ':' + str(request.args['cmd'])
+            command = f'python3 {ROOT_PATH}/irrp.py -p -g17 -f {ROOT_PATH}/codes {param}'
+            scr_name = 'irrp.py'
         
-
+        # 実行
         result = subprocess.run(command, shell=True, capture_output=True, text=True)
         
         if result.returncode == 0 and result.stdout == '':
             return f'Smartremocon has successfully sent a command ->   {param}'
         else:
-            return f'Failed to execute irrp.py'
+            return f'Failed to execute {scr_name}'
 
     else:
         return f'Bad query'
