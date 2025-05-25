@@ -108,7 +108,6 @@ if __name__ == '__main__':
     print("Connected!")
 
     message_topic = cmdData.input_topic
-    message_string = cmdData.input_message
 
     # Subscribe
     print("Subscribing to topic '{}'...".format(message_topic))
@@ -120,16 +119,14 @@ if __name__ == '__main__':
     subscribe_result = subscribe_future.result()
     print("Subscribed with {}".format(str(subscribe_result['qos'])))
 
-    # Publish message to server desired number of times.
-    # This step is skipped if message is blank.
-    # This step loops forever if count was set to 0.
-    if message_string:
-        print("Receiving messages until program killed")
-        try:
-            while True:
-                time.sleep(1)
-        except KeyboardInterrupt:
-            pass
+
+    # Main loop
+    print("Receiving messages until program killed")
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        pass
 
     # Disconnect
     print("Disconnecting...")

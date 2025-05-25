@@ -154,8 +154,6 @@ class CommandLineUtils:
         input_proxy_port : int
         # PubSub
         input_topic : str
-        input_message : str
-        input_count : int
 
         def __init__(self) -> None:
             pass
@@ -187,9 +185,7 @@ class CommandLineUtils:
         cmdData.input_clientId = cmdUtils.get_command(CommandLineUtils.m_cmd_client_id, "test-" + str(uuid4()))
         cmdData.input_proxy_host = cmdUtils.get_command(CommandLineUtils.m_cmd_proxy_host)
         cmdData.input_proxy_port = int(cmdUtils.get_command(CommandLineUtils.m_cmd_proxy_port))
-        cmdData.input_message = cmdUtils.get_command(CommandLineUtils.m_cmd_message, "Hello World! ")
         cmdData.parse_input_topic(cmdUtils, config)
-        cmdData.input_count = int(cmdUtils.get_command(CommandLineUtils.m_cmd_count, 10))
         cmdData.input_is_ci = cmdUtils.get_command(CommandLineUtils.m_cmd_is_ci, None) != None
         return cmdData
     
@@ -201,10 +197,8 @@ class CommandLineUtils:
     m_cmd_key_file = "key"
     m_cmd_proxy_host = "proxy_host"
     m_cmd_proxy_port = "proxy_port"
-    m_cmd_message = "message"
     m_cmd_topic = "topic"
     m_cmd_verbosity = "verbosity"
     m_cmd_port = "port"
     m_cmd_client_id = "client_id"
     m_cmd_is_ci = "is_ci"
-    m_cmd_count = "count"
