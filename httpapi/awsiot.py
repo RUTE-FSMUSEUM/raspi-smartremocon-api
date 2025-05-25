@@ -26,7 +26,7 @@ with open(CONFIG_PATH, 'r') as yml:
 # cmdData is the arguments/input from the command line placed into a single struct for
 # use in this sample. This handles all of the command line parsing, validating, etc.
 # See the Utils/CommandLineUtils for more information.
-cmdData = CommandLineUtils.parse_sample_input_pubsub()
+cmdData = CommandLineUtils.parse_sample_input_pubsub(config)
 
 # Callback when connection is accidentally lost.
 def on_connection_interrupted(connection, error, **kwargs):

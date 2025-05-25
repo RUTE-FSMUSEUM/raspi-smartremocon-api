@@ -80,7 +80,7 @@ class CommandLineUtils:
             CommandLineUtils.m_cmd_endpoint,
             "<str>",
             "The endpoint of the mqtt server not including a port.",
-            True,
+            False,
             str)
         self.register_command(
             CommandLineUtils.m_cmd_ca_file,
@@ -131,8 +131,8 @@ class CommandLineUtils:
                 x.name for x in io.LogLevel])
 
     def add_common_key_cert_commands(self):
-        self.register_command(CommandLineUtils.m_cmd_key_file, "<path>", "Path to your key in PEM format.", True, str)
-        self.register_command(CommandLineUtils.m_cmd_cert_file, "<path>", "Path to your client certificate in PEM format.", True, str)
+        self.register_command(CommandLineUtils.m_cmd_key_file, "<path>", "Path to your key in PEM format.", False, str)
+        self.register_command(CommandLineUtils.m_cmd_cert_file, "<path>", "Path to your client certificate in PEM format.", False, str)
 
 
     ########################################################################
@@ -160,13 +160,13 @@ class CommandLineUtils:
         def __init__(self) -> None:
             pass
 
-        def parse_input_topic(self, cmdUtils):
-            self.input_topic = cmdUtils.get_command(CommandLineUtils.m_cmd_topic, "test/topic")
+        def parse_input_topic(self, cmdUtils, config):
+            self.input_topic = cmdUtils.get_command(CommandLineUtils.m_cmd_topic, config["AWSIOT"]["TOPIC"])
             if (cmdUtils.get_command(CommandLineUtils.m_cmd_is_ci) != None):
                 self.input_topic += "/" + str(uuid4())
 
 
-    def parse_sample_input_pubsub():
+    def parse_sample_input_pubsub(config: dict):
         cmdUtils = CommandLineUtils("PubSub - Send and receive messages through an MQTT connection.")
         cmdUtils.add_common_mqtt_commands()
         cmdUtils.add_common_topic_message_commands()
@@ -179,16 +179,16 @@ class CommandLineUtils:
         cmdUtils.get_args()
 
         cmdData = CommandLineUtils.CmdData()
-        cmdData.input_endpoint = cmdUtils.get_command_required(CommandLineUtils.m_cmd_endpoint)
+        cmdData.input_endpoint = cmdUtils.get_command(CommandLineUtils.m_cmd_endpoint, config["AWSIOT"]["ENDPOINT"])
         cmdData.input_port = int(cmdUtils.get_command(CommandLineUtils.m_cmd_port, 8883))
-        cmdData.input_cert = cmdUtils.get_command_required(CommandLineUtils.m_cmd_cert_file)
-        cmdData.input_key = cmdUtils.get_command_required(CommandLineUtils.m_cmd_key_file)
-        cmdData.input_ca = cmdUtils.get_command(CommandLineUtils.m_cmd_ca_file, None)
+        cmdData.input_cert = cmdUtils.get_command(CommandLineUtils.m_cmd_cert_file, config["AWSIOT"]["CERT"])
+        cmdData.input_key = cmdUtils.get_command(CommandLineUtils.m_cmd_key_file, config["AWSIOT"]["PRIKEY"])
+        cmdData.input_ca = cmdUtils.get_command(CommandLineUtils.m_cmd_ca_file, config["AWSIOT"]["ROOTCA"])
         cmdData.input_clientId = cmdUtils.get_command(CommandLineUtils.m_cmd_client_id, "test-" + str(uuid4()))
         cmdData.input_proxy_host = cmdUtils.get_command(CommandLineUtils.m_cmd_proxy_host)
         cmdData.input_proxy_port = int(cmdUtils.get_command(CommandLineUtils.m_cmd_proxy_port))
         cmdData.input_message = cmdUtils.get_command(CommandLineUtils.m_cmd_message, "Hello World! ")
-        cmdData.parse_input_topic(cmdUtils)
+        cmdData.parse_input_topic(cmdUtils, config)
         cmdData.input_count = int(cmdUtils.get_command(CommandLineUtils.m_cmd_count, 10))
         cmdData.input_is_ci = cmdUtils.get_command(CommandLineUtils.m_cmd_is_ci, None) != None
         return cmdData

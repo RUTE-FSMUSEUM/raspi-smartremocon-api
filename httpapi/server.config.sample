@@ -2,3 +2,9 @@ SERVER:
     HOST: "0.0.0.0"
     PORT: "5050"
     NON_RASPI_MODE: FALSE
+AWSIOT:
+    ENDPOINT: "{your-iot-endpoint-id}-ats.iot.{your-iot-region}.amazonaws.com"
+    CERT: "{your-device-certificate}.pem.crt"
+    PRIKEY: "{your-private-key}.pem.key"
+    ROOTCA: "{your-root-CA-certificate}.pem"
+    TOPIC: "{your-topic-name}"
