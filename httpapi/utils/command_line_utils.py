@@ -169,6 +169,7 @@ class CommandLineUtils:
         cmdData.input_cert = cmdUtils.get_command(CommandLineUtils.m_cmd_cert_file, config["AWSIOT"]["CERT"])
         cmdData.input_key = cmdUtils.get_command(CommandLineUtils.m_cmd_key_file, config["AWSIOT"]["PRIKEY"])
         cmdData.input_ca = cmdUtils.get_command(CommandLineUtils.m_cmd_ca_file, config["AWSIOT"]["ROOTCA"])
+        cmdUtils.m_cmd_topic = cmdUtils.get_command(CommandLineUtils.m_cmd_topic, config["AWSIOT"]["TOPIC"])
         cmdData.input_clientId = cmdUtils.get_command(CommandLineUtils.m_cmd_client_id, "test-" + str(uuid4()))
         cmdData.input_proxy_host = cmdUtils.get_command(CommandLineUtils.m_cmd_proxy_host)
         cmdData.input_proxy_port = int(cmdUtils.get_command(CommandLineUtils.m_cmd_proxy_port))
